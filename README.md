@@ -193,6 +193,15 @@ The collaboration with Amazon Q Developer significantly accelerated the developm
 - Mdurl
 - Nmap (for scanning functionality)
 
-## License
+## 🔍 Proof of Work
 
-MIT
+Here are screenshots showing the working implementation of `enumCSh`:
+
+### 🖼️ Screenshot 1 – CLI Command Execution
+![Screenshot 1](Working/s1.png)
+
+### 🖼️ Screenshot 2 – Output View
+![Screenshot 2](Working/s2.png)
+
+### 🖼️ Screenshot 3 – Interactive Usage
+![Screenshot 3](Working/s3.png)
