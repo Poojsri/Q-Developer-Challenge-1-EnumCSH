@@ -1,5 +1,7 @@
 # enumCSh
 
+“In a live engagement, copying commands manually eats up time. enumcsh helps avoid those mental lapses under pressure.”
+
 ```
   _____                          _____  _____ _     
  |  ___|                        /  __ \/  ___| |    
