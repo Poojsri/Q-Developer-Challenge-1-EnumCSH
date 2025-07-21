@@ -1,0 +1,142 @@
+{
+    "ports": {
+        "21": {
+            "service": "ftp",
+            "description": "File Transfer Protocol",
+            "nmap": "nmap -sV -p 21 -sC --script=ftp-* {target}",
+            "metasploit": [
+                "use auxiliary/scanner/ftp/ftp_version",
+                "use auxiliary/scanner/ftp/anonymous"
+            ],
+            "manual": [
+                "ftp {target}",
+                "Try anonymous:anonymous login",
+                "Check if PUT/GET commands are allowed"
+            ]
+        },
+        "22": {
+            "service": "ssh",
+            "description": "Secure Shell",
+            "nmap": "nmap -sV -p 22 -sC --script=ssh-* {target}",
+            "metasploit": [
+                "use auxiliary/scanner/ssh/ssh_version",
+                "use auxiliary/scanner/ssh/ssh_enumusers"
+            ],
+            "manual": [
+                "ssh -v {target}",
+                "Check for weak credentials",
+                "Try username enumeration"
+            ]
+        },
+        "23": {
+            "service": "telnet",
+            "description": "Telnet",
+            "nmap": "nmap -sV -p 23 -sC --script=telnet-* {target}",
+            "metasploit": [
+                "use auxiliary/scanner/telnet/telnet_version",
+                "use auxiliary/scanner/telnet/telnet_login"
+            ],
+            "manual": [
+                "telnet {target}",
+                "Check for default credentials",
+                "Look for banner information"
+            ]
+        },
+        "25": {
+            "service": "smtp",
+            "description": "Simple Mail Transfer Protocol",
+            "nmap": "nmap -sV -p 25 -sC --script=smtp-* {target}",
+            "metasploit": [
+                "use auxiliary/scanner/smtp/smtp_version",
+                "use auxiliary/scanner/smtp/smtp_enum"
+            ],
+            "manual": [
+                "telnet {target} 25",
+                "EHLO localhost",
+                "VRFY admin",
+                "Check for user enumeration"
+            ]
+        },
+        "80": {
+            "service": "http",
+            "description": "HTTP Web Server",
+            "nmap": "nmap -sV -p 80 -sC --script=http-* {target}",
+            "metasploit": [
+                "use auxiliary/scanner/http/http_version",
+                "use auxiliary/scanner/http/dir_scanner"
+            ],
+            "manual": [
+                "curl -v http://{target}/",
+                "gobuster dir -u http://{target}/ -w /usr/share/wordlists/dirb/common.txt",
+                "nikto -h http://{target}/"
+            ]
+        },
+        "443": {
+            "service": "https",
+            "description": "HTTPS Web Server",
+            "nmap": "nmap -sV -p 443 -sC --script=http-* --script=ssl-* {target}",
+            "metasploit": [
+                "use auxiliary/scanner/http/http_version",
+                "use auxiliary/scanner/http/ssl"
+            ],
+            "manual": [
+                "curl -vk https://{target}/",
+                "gobuster dir -u https://{target}/ -w /usr/share/wordlists/dirb/common.txt -k",
+                "sslscan {target}"
+            ]
+        },
+        "445": {
+            "service": "smb",
+            "description": "Server Message Block",
+            "nmap": "nmap -sV -p 445 -sC --script=smb-* {target}",
+            "metasploit": [
+                "use auxiliary/scanner/smb/smb_version",
+                "use auxiliary/scanner/smb/smb_enumshares",
+                "use auxiliary/scanner/smb/smb_enumusers"
+            ],
+            "manual": [
+                "smbclient -L {target}",
+                "enum4linux -a {target}",
+                "crackmapexec smb {target}"
+            ]
+        },
+        "3306": {
+            "service": "mysql",
+            "description": "MySQL Database",
+            "nmap": "nmap -sV -p 3306 -sC --script=mysql-* {target}",
+            "metasploit": [
+                "use auxiliary/scanner/mysql/mysql_version",
+                "use auxiliary/scanner/mysql/mysql_login"
+            ],
+            "manual": [
+                "mysql -h {target} -u root -p",
+                "Check for default credentials",
+                "Try common username/password combinations"
+            ]
+        },
+        "unknown": {
+            "service": "unknown",
+            "description": "Unknown service",
+            "nmap": "nmap -sV -p {port} -sC {target}",
+            "metasploit": [
+                "use auxiliary/scanner/discovery/udp_sweep",
+                "use auxiliary/scanner/discovery/tcp_port_scan"
+            ],
+            "manual": [
+                "nc -nv {target} {port}",
+                "telnet {target} {port}",
+                "Try sending various protocol handshakes"
+            ]
+        }
+    },
+    "services": {
+        "ftp": "21",
+        "ssh": "22",
+        "telnet": "23",
+        "smtp": "25",
+        "http": "80",
+        "https": "443",
+        "smb": "445",
+        "mysql": "3306"
+    }
+}
